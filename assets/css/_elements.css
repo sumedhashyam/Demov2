@@ -1,0 +1,477 @@
+// progress circle
+// $progress-circle-size: 50px;
+
+// .draw-progress(@progress, @color) when (@progress <= 50) {
+//   .pie {
+//     .right-side {
+//       display: none;
+//     }
+//   }
+// }
+
+// .draw-progress(@progress, @color) when (@progress > 50) {
+//   .pie {
+//     clip: rect(auto, auto, auto, auto);
+
+//     .right-side {
+//       transform: rotate(180deg);
+//     }
+//   }
+// }
+
+// .draw-progress(@progress, @color) {
+//   .pie {
+//     .half-circle {
+//       border-color: @color;
+//     }
+//     .left-side {
+//       @rotate: @progress * 3.6;
+//       transform: rotate(~'@{rotate}deg');
+//     }
+//   }
+// }
+
+// .progress-circle {
+//   @include size($progress-circle-size $progress-circle-size);
+//   float: left;
+//   margin: 15px;
+//   position: relative;
+
+//   &:nth-child(3n+1) {
+//     clear: both;
+//   }
+
+//   .pie {
+//     @include size(100% 100%);
+//     clip: rect(0, $progress-circle-size, $progress-circle-size, $progress-circle-size / 2);
+//     left: 0;
+//     position: absolute;
+//     top: 0;
+
+//     .half-circle {
+//       @include size(100% 100%);
+//       border-color: $red;
+//       border: $progress-circle-size / 2 solid #3498db;
+//       border-radius: 50%;
+//       clip: rect(0, $progress-circle-size / 2, $progress-circle-size, 0);
+//       left: 0;
+//       position: absolute;
+//       top: 0;
+//     }
+//   }
+
+//   .shadow {
+//     @include size(100% 100%);
+//     border: $progress-circle-size / 10 solid #bdc3c7;
+//     border-radius: 50%;
+//   }
+// }
+
+@mixin close-x($height-width, $thickness, $color) {
+  position: relative;
+  display: inline-block;
+  width: $height-width;
+  height: $height-width;
+  overflow: hidden;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    height: $thickness;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: $color;
+  }
+  &::before {
+    @include transform(rotate(45deg));
+  }
+  &::after {
+    @include transform(rotate(-45deg));
+  }
+}
+
+@mixin line-item {
+  @include display(flex);
+  @include pad($small-spacing 0);
+  border-bottom: $base-border;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  .line-item-avatar {
+    @include size(50px);
+    position: relative;
+    img {
+      border-radius: $image-border-radius;
+    }
+  }
+
+  .line-item-content {
+    @include flex(1);
+    height: 50px;
+    padding-left: $small-spacing;
+    position: relative;
+    font-size: 11px;
+
+    h4, p {
+      margin: 0;
+
+      a {
+        font-weight: 400;
+        color: $body-gray;
+      }
+    }
+
+    h4 {
+      font-size: 14px;
+      a {
+        color: $body-gray;
+      }
+    }
+
+    p.line-item-meta {
+      color: $body-gray;
+      opacity: 0.8;
+      font-size: 12px;
+      a {
+        color: $dark-gray;
+      }
+    }
+  }
+}
+
+@mixin circle($width, $color) {
+  width: $width;
+  height: $width;
+  background: $color;
+  -webkit-border-radius: $width/2;
+     -moz-border-radius: $width/2;
+          border-radius: $width/2;
+}
+
+@mixin circle-border($width, $color, $borderWidth, $borderColor) {
+  width: $width;
+  height: $width;
+  background: $color;
+  -webkit-border-radius: $width/2;
+     -moz-border-radius: $width/2;
+          border-radius: $width/2;
+  border: $borderWidth solid $borderColor;
+  box-sizing: border-box;
+}
+
+@mixin circle-hollow($width, $borderWidth, $borderColor) {
+  width: $width;
+  height: $width;
+  background: none;
+  -webkit-border-radius: $width/2;
+     -moz-border-radius: $width/2;
+          border-radius: $width/2;
+  border: $borderWidth solid $borderColor;
+  box-sizing: border-box;
+}
+
+.arrow {
+  background: url('/assets/images/ic-arrow.svg');
+  background-position: 0 0;
+  background-size: 10px 6px;
+
+  @include size(10px 6px);
+  @include transition(all 500ms ease);
+
+  &.up {
+    @include transform(rotate(180deg));
+  }
+}
+
+.page-header {
+  background-color: $secondary-background-color;
+  padding: 0 $base-spacing;
+  border: $base-border;
+  border-bottom: none;
+  height: 65px;
+
+  h2 {
+    float: left;
+    margin-bottom: 0;
+    margin-top: 19px;
+    color: $dark-gray;
+  }
+
+  #{$all-buttons} {
+    float: right;
+    padding-top: $small-spacing;
+    padding-bottom: $small-spacing;
+    margin-left: $small-spacing;
+  }
+
+  .tab-toggle {
+    height: 65px;
+    margin-top: 0;
+    padding-top: 0;
+
+    li {
+      a {
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 64px;
+        line-height: 64px;
+
+        &.selected {
+          color: $red;
+          box-shadow: inset 0 -3px 0 $red ;
+        }
+      }
+    }
+  }
+
+  &.with-subtitle {
+    h2 {
+      margin-top: 12px;
+      span {
+        display: block;
+        font-size: 13px;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.sidebar-heading {
+  h3.lined {
+    margin-top: 7px;
+    padding-bottom: $base-spacing;
+    margin-bottom: $base-spacing;
+  }
+}
+
+.null-state {
+  text-align: center;
+}
+
+.test{
+  border: 1px solid black;
+}
+
+.tab-toggle {
+  margin: 0;
+  li {
+    display: inline;
+  }
+
+  a {
+    display: block;
+    float: left;
+    padding: ($small-spacing / 2) $base-spacing;
+    // padding: 10px 2px;
+    // border-radius: 100px;
+    margin-top: 22px;
+    text-transform: uppercase;
+    font-size: 12px;
+
+    &.selected {
+      // background: $action-color;
+      color: $body-gray;
+      font-weight: bold;
+    }
+  }
+}
+
+.clearfix {
+  @include clearfix();
+}
+
+
+md-chip {
+  background: white !important;
+  border: 1px solid $action-color;
+  color: $action-color;
+  border-radius: 1000px;
+
+  strong {
+    color: $action-color !important;
+  }
+}
+
+@keyframes flash-appear {
+  0% {
+    bottom: -100%;
+    opacity: 0;
+  }
+  50% {
+    bottom: 0;
+  }
+  100% {
+    bottom: -20px;
+    opacity: 1;
+  }
+}
+
+.flash {
+  @include pad($base-spacing $base-spacing ($base-spacing + 20px) $base-spacing);
+  @include transition(all 500ms ease);
+  position: fixed;
+  bottom: -100%;
+  top: auto;
+  left: $nav-width;
+  right: $sidebar-min;
+  z-index: 1001;
+
+  @include media(max-width 1300px) {
+    left: 80px;
+  }
+
+  &.open {
+    @include animation(flash-appear 1.5s ease);
+    @include animation-iteration-count(1);
+    opacity: 1;
+    bottom: -20px;
+  }
+
+  h3, p {
+    color: white;
+  }
+
+  h3 {
+    font-size: 18px;
+    margin-bottom: $small-spacing / 2;
+  }
+
+  a {
+    @include size(18px);
+    text-indent: -500000px;
+    outline: none;
+    position: absolute;
+    color: white;
+    display: block;
+    top: $base-spacing;
+    right: $base-spacing;
+    background-image: url('/assets/images/ic_close_white.svg');
+    background-repeat: no-repeat;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  &.flash-error {
+    background: $red;
+  }
+
+  &.flash-success {
+    background: $green;
+
+  }
+}
+
+body.modal-open {
+  .flash {
+    left: 0;
+    right: 0;
+  }
+}
+
+.large-avatar {
+  img {
+    @include size(50px);
+    border-radius: $image-border-radius;
+  }
+}
+
+.small-avatar {
+  img {
+    @include size(25px);
+    border-radius: $image-border-radius;
+  }
+}
+
+.gray-gradient {
+  background: -webkit-linear-gradient(white, $gradient-gray);
+  background: -o-linear-gradient(white, $gradient-gray);
+  background: -moz-linear-gradient(white, $gradient-gray);
+  background: linear-gradient(white, $gradient-gray);
+}
+
+
+/// Autocompleter - Line Items
+
+.autocomplete-wrapper {
+  position: relative;
+  z-index: 4;
+}
+
+.autocomplete {
+  position: absolute;
+  z-index: 5;
+  top: 43px;
+  background: white;
+  border: $base-border;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.autocomplete-row {
+  @include line-item();
+  padding-left: $small-spacing;
+  padding-right: $small-spacing;
+
+  &:hover,
+  &.selected {
+    background: $tertiary-background-color;
+  }
+
+  &:first-child {
+    padding-top: $small-spacing;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  h4, p {
+    margin: 0;
+  }
+
+  h4 {
+    font-size: 12px;
+  }
+
+  p {
+    font-size: 10px;
+  }
+
+  .line-item-avatar {
+    @include size(25px);
+
+    img {
+      @include size(25px);
+    }
+  }
+
+  .line-item-content {
+    height: auto;
+  }
+}
+
+.mini-logo {
+  max-height: 30px;
+}
+
+.loader {
+  background-color: white !important;
+  background-image: url("/assets/images/spinner.svg") !important;
+  background-position: 50% !important;
+  background-repeat: no-repeat !important;
+}
+
+.sidebar-loader {
+  background-color: white !important;
+  background-image: url("/assets/images/spinner.svg") !important;
+  background-position: 50% 150px !important;
+  background-repeat: no-repeat !important;
+  background-size: 100px;
+}

@@ -1,0 +1,22 @@
+﻿<div class="topbar"></div>
+<div class="header-main clearfix" ng-controller="headerctrl">
+    <div class="logo">
+        <a href="/dashboard.html">Centrl</a>
+    </div>
+    <div class="header_right clearfix">
+        <span class="left_text">Client Management</span>
+        <ul class="nav nav-tabs right_nav">
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome {{ name }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Help</a></li>
+                    <li><a href="/index.html#/login?id=logout">LogOut</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="control-sidebar" ng-click="showhideside()"><i class="fa fa-gears"></i></a>
+            </li>
+
+        </ul>
+    </div>
+</div>

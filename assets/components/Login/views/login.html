@@ -1,0 +1,54 @@
+﻿<section class="login_page" ng-controller="loginCtrl as vm">
+    <div class="modalnew" data-ng-show="ShowLoader">
+    </div>
+    <div class="row">
+        <div class="col-sm-5 login-left">
+            <div class="login_logo">
+                <a href="#">Admin</a>
+            </div>
+        </div>
+        <div class="col-sm-7 login-right">
+            <div class="login_form">
+
+                
+                <h2 class="heading">Login</h2>
+                <div class="alert alert-danger" role="alert" ng-show="errormsgs" data-ng-bind-html="errormsg"></div>
+
+                <form name="loginForm" ng-submit="vm.addData()" novalidate>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Address" name="email" class="form-control"
+                            input-label="Email"
+                            ng-model="vm.user.userName"
+                            required>
+                        <div class="help-block" ng-show="loginForm.email.$touched && loginForm.email.$invalid">
+                            <p class="ng-message">This needs to be a valid email</p>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <input name='password' placeholder="Password" type='password' class="form-control"
+                            input-label="Password"
+                            ng-model="vm.user.password"
+                            ng-minlength="5"
+                            ng-maxlength="30"
+                            required>
+                        <div class="help-block" ng-show="loginForm.password.$touched && loginForm.password.$invalid">
+                            <p class="ng-message" ng-message="email">This needs to be a valid password</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!--<button class="btn btn-login" type="submit">Login</button>-->
+                        <button ng-disabled="loginForm.$invalid && !loginForm.$dirty || vm.loggingIn" class='btn btn-login' ng-class="{'spinner': vm.loggingIn}" type="submit" class="btn btn-login">Login</button>
+
+                    </div>
+                    <div class="bottom_link">
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

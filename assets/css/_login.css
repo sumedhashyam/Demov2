@@ -1,0 +1,220 @@
+body.login,
+body.register,
+body.coldRegistration,
+body.newPassword,
+body.verifyEmail,
+body.forgot_password,
+body.emailRecoveryConfirmation,
+body.resetPassword {
+  background: white;
+  height: 100%;
+  header {
+    display: none;
+  }
+
+  .flash {
+    left: 40%;
+    right: 0;
+  }
+
+  h1 {
+    width: 350px;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .upper-half {
+    height: 345px;
+    width: 100%;
+    @include linear-gradient(110deg, $link-blue, #384A60);
+  }
+
+  .left-half,
+  .right-half {
+    height: 100%;
+    @include display(flex);
+    @include align-items(center);
+  }
+
+  .left-half {
+    float: left;
+    width: 40%;
+    @include linear-gradient(110deg, #60C1CC, $link-blue);
+    text-align: center;
+  }
+
+  .right-half {
+    float: right;
+    width: 60%;
+    // background: url('/assets/images/gfx-grand-central.jpg');
+    background-repeat: repeat-x;
+    background-position: 0 100%;
+
+    form {
+      margin-top: -100px;
+      display: block;
+    }
+  }
+
+  .login-row-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  .upper-half-cold {
+    height: 345px;
+    width: 100%;
+    // @include linear-gradient(110deg, $link-blue, #384A60);
+  }
+
+  .login-container { margin-top: 80px; }
+  .registration-container { margin-top: 20px; }
+  .forgot-password-container { margin-top: 65px; }
+
+  .registration-container,
+  .login-container,
+  .forgot-password-container, .reset-password-container {
+    width: 450px;
+    margin-right: auto;
+    margin-left: auto;
+
+    h2 {
+      color: $dark-gray;
+      font-size: 28px;
+      font-weight: 100;
+      margin-bottom: $small-spacing / 2;
+
+      &.single {
+        margin-bottom: $base-spacing;
+      }
+    }
+
+    p.white {
+      color: white;
+    }
+
+    form {
+      .input {
+        height: 60px;
+        margin-bottom: 0;
+        background: transparent;
+        border: none;
+        padding-left: 0;
+
+        label {
+          left: 0;
+          top: 16px;
+          font-size: 18px;
+          font-weight: 100;
+        }
+
+        input {
+          padding-top: 15px;
+          padding-bottom: 20px;
+          font-size: 18px;
+          font-weight: 100;
+          border-bottom: $base-border;
+          padding-left: 0;
+
+          &.modified {
+            border-bottom-color: $medium-gray;
+          }
+
+          &.modified:not(:focus){
+            & ~ u {
+              width: 0;
+            }
+          }
+
+          &:focus {
+            outline: none;
+            border-bottom-color: $action-color;
+          }
+
+          &:focus ~ label,
+          &.modified ~ label {
+            left: 0;
+            top: -14px !important;
+            font-size: 13px;
+            background: white;
+            color: $medium-gray;
+            // font-weight: 600;
+            padding: 5px 10px 5px 0;
+          }
+        }
+
+        &.full-border {
+          // border-bottom: $base-border;
+          margin-bottom: $base-spacing;
+        }
+      }
+
+      button {
+        height: 60px;
+        padding-top: 0;
+        padding-bottom: 0;
+        line-height: 60px;
+      }
+    }
+
+    .module-selector-container {
+      border-bottom: $base-border;
+      select {
+        &:after {
+          padding-top: 31px !important;
+        }
+      }
+    }
+
+  }
+
+  .single-task {
+    border: none;
+
+    .line-item-avatar {
+      img {
+        border-radius: 1000px;
+      }
+    }
+
+    .task-reciever,
+    .task-organization,
+    .task-action {
+      font-weight: bold;
+      color: $body-gray;
+      cursor: default;
+    }
+
+    .line-item-content {
+      h4 {
+        padding-top: 15px;
+      }
+      .line-item-meta {
+        display: none;
+      }
+    }
+
+    .label {
+      display: none;
+    }
+  }
+}
+
+.avatar-container{
+  background: white;
+  height: 180px;
+  width: 200px;
+  margin-left: 42%;
+  margin-bottom: -149px;
+}
+
+
+.new-password-container {
+  margin-top: 76px;
+  .confirm-new-password{
+    margin-top: -20px;
+  }
+}

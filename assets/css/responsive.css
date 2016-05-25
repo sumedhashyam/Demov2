@@ -1,0 +1,30 @@
+﻿/* Large desktop */
+@media (min-width: 1200px) {}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    .login_page .login_logo {
+        padding: 260px 0 0px;
+    }
+    .login_page .login-right .login_form {
+    padding: 210px 3em 0px;
+}
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    .login_page .login-left {
+        height:inherit;
+    }
+    .login_page .login_logo {
+    padding: 50px;
+    text-align: center;
+}
+    .login_page .login-right .login_form {
+    padding: 50px 20px;
+}
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {}
